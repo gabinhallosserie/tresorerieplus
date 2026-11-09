@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {{ head("Page introuvable") }}
+    <meta name="robots" content="noindex">
+    <script type="module" src="/src/js/app.js"></script>
+</head>
+<body class="flex min-h-screen flex-col">
+    {{ header() }}
+
+    <main id="contenu" class="flex-1">
+        {{ pageHeader("Erreur 404", "Cette page n'existe pas", "Le lien que vous avez suivi est peut-être erroné ou la page a été déplacée.") }}
+
+        <section class="container-page py-12">
+            <a href="/" class="btn btn-primary">Retour à l'accueil {{ icon("arrow", "size-4") }}</a>
+        </section>
+    </main>
+
+    {{ footer() }}
+</body>
+</html>

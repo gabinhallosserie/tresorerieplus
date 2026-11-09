@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {{ head("Contact", "Contactez Trésorerie Plus : appelez le 06 87 04 88 68 ou écrivez-nous pour convenir d'un premier rendez-vous gratuit.") }}
+    <script type="module" src="/src/js/app.js"></script>
+</head>
+<body class="flex min-h-screen flex-col">
+    {{ header("contact") }}
+
+    <main id="contenu" class="flex-1">
+        {{ pageHeader("Contact", "Écrivez-nous, nous vous répondons rapidement", "Une question, un besoin d'accompagnement ou l'envie de rejoindre le réseau ? Contactez-nous par téléphone ou par e-mail.") }}
+
+        <section class="container-page grid gap-10 py-16 lg:grid-cols-[1.5fr_1fr]">
+            <div class="card p-6 sm:p-8">
+                {{ unavailable("Le formulaire de contact") }}
+
+                <form class="grid gap-5 sm:grid-cols-2" aria-disabled="true" onsubmit="return false">
+                    <fieldset disabled class="contents">
+                        <legend class="sr-only">Formulaire de contact (désactivé)</legend>
+
+                        <div>
+                            <label for="name" class="field-label">Nom et prénom</label>
+                            <input id="name" name="name" type="text" class="field-input" autocomplete="name">
+                        </div>
+                        <div>
+                            <label for="email" class="field-label">E-mail</label>
+                            <input id="email" name="email" type="email" class="field-input" autocomplete="email">
+                        </div>
+                        <div>
+                            <label for="phone" class="field-label">Téléphone <span class="font-normal text-ink-soft">(facultatif)</span></label>
+                            <input id="phone" name="phone" type="tel" class="field-input" autocomplete="tel">
+                        </div>
+                        <div>
+                            <label for="subject" class="field-label">Objet</label>
+                            <select id="subject" name="subject" class="field-input">
+                                <option value="information">Demande d'information</option>
+                                <option value="diagnostic">Diagnostic de trésorerie</option>
+                                <option value="network">Rejoindre le réseau</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="message" class="field-label">Votre message</label>
+                            <textarea id="message" name="message" rows="5" class="field-input"></textarea>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <button type="submit" class="btn btn-primary w-full sm:w-auto">
+                                {{ icon("mail", "size-4") }}
+                                Envoyer mon message
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <aside class="space-y-6">
+                <div class="card">
+                    <div class="flex items-center gap-4">
+                        <img src="/images/patricia-vialaret.jpg" alt="" width="150" height="226" class="h-20 w-16 rounded-xl object-cover object-top">
+                        <div>
+                            <p class="text-sm font-semibold text-ink-soft">Votre conseillère</p>
+                            <p class="mt-1 text-lg font-bold">{{ advisor("name") }}</p>
+                        </div>
+                    </div>
+                    <ul class="mt-5 space-y-4 text-sm">
+                        <li class="flex gap-3">
+                            {{ icon("phone", "mt-0.5 size-4 shrink-0 text-brand-600") }}
+                            <a href="tel:{{ advisor("phoneLink") }}" class="font-semibold hover:text-brand-600">{{ advisor("phone") }}</a>
+                        </li>
+                        <li class="flex gap-3">
+                            {{ icon("mail", "mt-0.5 size-4 shrink-0 text-brand-600") }}
+                            <a href="mailto:{{ advisor("email") }}" class="break-all hover:text-brand-600">{{ advisor("email") }}</a>
+                        </li>
+                        <li class="flex gap-3">
+                            {{ icon("pin", "mt-0.5 size-4 shrink-0 text-brand-600") }}
+                            <span>{{ advisor("street") }}<br>{{ advisor("city") }}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="rounded-2xl bg-brand-600 p-6 text-white">
+                    <p class="text-lg font-bold">Vous préférez en parler ?</p>
+                    <p class="mt-1 text-white/80">Appelez-nous pour fixer un premier rendez-vous gratuit.</p>
+                    <a href="tel:{{ advisor("phoneLink") }}" class="btn mt-4 bg-white text-ink hover:bg-brand-50">
+                        {{ icon("phone", "size-4") }}
+                        {{ advisor("phone") }}
+                    </a>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    {{ footer() }}
+</body>
+</html>

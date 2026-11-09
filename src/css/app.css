@@ -1,0 +1,96 @@
+@import 'tailwindcss';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+    --color-ink: #0b2545;
+    --color-ink-soft: #3d5170;
+    --color-paper: #f8f9fb;
+    --color-line: #e3e8f0;
+
+    --color-brand-50: #eef4ff;
+    --color-brand-100: #dbe7fe;
+    --color-brand-500: #2b6fe0;
+    --color-brand-600: #1b5bc9;
+    --color-brand-700: #1749a3;
+
+    --color-growth-50: #e9f8f1;
+    --color-growth-500: #12a16b;
+    --color-growth-600: #0c8457;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-paper font-sans text-ink antialiased;
+    }
+
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-brand-500;
+    }
+}
+
+@layer components {
+    .container-page {
+        @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-full whitespace-nowrap px-5 py-3 text-sm font-semibold transition;
+    }
+
+    .btn-primary {
+        @apply bg-brand-600 text-white shadow-sm hover:bg-brand-700;
+    }
+
+    .btn-secondary {
+        @apply border border-line bg-white text-ink hover:border-brand-500 hover:text-brand-600;
+    }
+
+    .eyebrow {
+        @apply text-xs font-bold tracking-[0.14em] text-brand-600 uppercase;
+    }
+
+    .card {
+        @apply rounded-2xl border border-line bg-white p-6 shadow-[0_1px_2px_rgba(11,37,69,0.04)];
+    }
+
+    .field-label {
+        @apply mb-1.5 block text-sm font-semibold text-ink;
+    }
+
+    .field-input {
+        @apply block w-full rounded-xl border border-line bg-white px-4 py-3 text-base text-ink placeholder:text-ink-soft/60 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 focus:outline-none;
+    }
+
+    /* Formulaires désactivés (site statique, pas de back-end). */
+    fieldset:disabled .field-input,
+    fieldset:disabled .btn,
+    fieldset:disabled input[type='radio'] {
+        @apply cursor-not-allowed opacity-60;
+    }
+
+    fieldset:disabled .btn-primary {
+        @apply hover:bg-brand-600;
+    }
+
+    .prose-page h2 {
+        @apply mt-10 mb-3 text-xl font-bold text-ink;
+    }
+
+    .prose-page p,
+    .prose-page li {
+        @apply leading-relaxed text-ink-soft;
+    }
+
+    .prose-page p {
+        @apply mb-4;
+    }
+
+    .prose-page ul {
+        @apply mb-4 list-disc space-y-1 pl-5;
+    }
+}
