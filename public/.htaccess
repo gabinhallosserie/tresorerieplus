@@ -1,0 +1,39 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Forcer HTTPS (à décommenter une fois le certificat SSL actif sur OVH)
+    # RewriteCond %{HTTPS} off [OR]
+    # RewriteCond %{HTTP_HOST} ^tresorerie-plus\.fr$ [NC]
+    # RewriteRule ^ https://www.tresorerie-plus.fr%{REQUEST_URI} [L,R=301]
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+    # Anciennes URL du site WebDev
+    RewriteRule ^FR/?$ / [L,R=301]
+    RewriteRule ^FR/index\.php$ / [L,R=301]
+    RewriteRule ^FR/tresorerie-plus\.php$ /methode [L,R=301]
+    RewriteRule ^FR/methode\.php$ /methode [L,R=301]
+    RewriteRule ^FR/apropos\.php$ /mentions-legales [L,R=301]
+    RewriteRule ^FR/.+\.(php|awp)$ / [L,R=301]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Handle X-XSRF-Token Header
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
